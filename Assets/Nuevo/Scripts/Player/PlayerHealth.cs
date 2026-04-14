@@ -11,7 +11,7 @@ public class PlayerHealth : MonoBehaviour, IHittable
 
     public bool isAlive => _currentHealth > 0;      //Comprueba que sigue vivo
     public GameObject camera;
-    public TargetType targetType;
+    private TypeOfCharacter typeOfCharacter;
 
     [SerializeField]
     protected int _currentHealth;       
@@ -23,18 +23,13 @@ public class PlayerHealth : MonoBehaviour, IHittable
     private PlayerMovement movement;
     private PlayerShooting shooting;
 
-    [SerializeField] private JSONLoggerKills killsLogger;
 
-
-    public enum TargetType
-    {
-        Player
-    }
 
     private void Awake()
     {
         _material = GetComponent<Renderer>().material;
         camera = GameObject.Find("Main Camera");
+        typeOfCharacter = GetComponent<TypeOfCharacter>();
 
         movement = Player.instance.GetComponent<PlayerMovement>();
         shooting = Player.instance.GetComponent<PlayerShooting>();
@@ -54,7 +49,7 @@ public class PlayerHealth : MonoBehaviour, IHittable
             StartCoroutine(SetInvulnerable());      //Espera invulnerabilidad
             _currentHealth -= amount;       //Quita vida
             var healthProportion = _currentHealth / (float)maxHealth;       //Propocion de vida para DOTween
-            if(targetType == TargetType.Player )
+            if(typeOfCharacter.targetType == TypeOfCharacter.TargetType.Player)
             {
                 Color targetColor = new Color(1, healthProportion, healthProportion, 1);        //Color en proporcion al daño recibido
                 _material.DOColor(Color.red, 0.15f).SetLoops(3).onComplete = () => _material.color = targetColor;
@@ -97,8 +92,6 @@ public class PlayerHealth : MonoBehaviour, IHittable
     public void Kill()      //Elimina vida completa del Player y la pasa al json
     {
         TakeDamage(_currentHealth);
-        if (killsLogger != null)
-            killsLogger.RegisterKill();
 
     }
 

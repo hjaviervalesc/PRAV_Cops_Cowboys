@@ -29,10 +29,12 @@ public class Explosive : MonoBehaviour
 
     private void RemoveInSphere(Collider element)
     {
-      var health = element.GetComponent<PlayerHealth>();      //Si tiene componente de Health elimina todo lo que hay dentro. Pulsar tecla como ejercicio y que tenga en cuenta si esta en bunker y el personaje, que sea como parte del ejercicio final
-        if (health)
-            health.Kill();
+        if (element.TryGetComponent<IHittable>(out var hittable))
+        {
+            hittable.TakeDamage(9999); // daño letal
+        }
     }
+
 
     private IEnumerator ExplosionCoroutine()
     {

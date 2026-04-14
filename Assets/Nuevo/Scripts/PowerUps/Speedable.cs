@@ -11,22 +11,27 @@ public class Speedable : MonoBehaviour, IPickable
     // Delegado opcional para añadir efectos extra
     public Action<Player> OnPickedExtra;
 
+    [SerializeField] private JSONLoggerSpeedables speedableLogger;
+
     public void OnPick(Player player)
     {
-        // Aumentar velocidad
+        // Registrar recogida
+        if (speedableLogger != null)
+            speedableLogger.RegisterPickup();
+
+        // Aplicar efecto al jugador
         player.movement.ModifySpeed(speedMultiplier, duration);
 
-        // Tween visual básico
+        // Tween visual
         transform.DOScale(0, 0.25f).SetEase(Ease.InBack);
 
-        // Ejecutar efectos extra si los hay
+        // Efectos extra del manager
         OnPickedExtra?.Invoke(player);
 
-        transform.DOScale(0, 0.25f)
-        .SetEase(Ease.InBack)
-        .OnKill(() => { }); // evita errores
-
-        // Destruir power-up
-        Destroy(gameObject, 0.3f);
+        // Devolver al pool después del tween
+        DOVirtual.DelayedCall(0.3f, () =>
+        {
+            PoolManager.instance.Despawn(gameObject);
+        });
     }
 }

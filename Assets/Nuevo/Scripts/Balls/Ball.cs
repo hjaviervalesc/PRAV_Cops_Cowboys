@@ -8,7 +8,6 @@ public abstract class Ball : MonoBehaviour
     {
         // Caída 
         transform.position += Vector3.down * fallSpeed * Time.deltaTime;
-        Debug.Log("h");
     }
 
     void OnTriggerEnter(Collider other)

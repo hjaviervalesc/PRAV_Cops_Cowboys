@@ -4,31 +4,33 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 4f;
-    private Transform _transform;
+    private Rigidbody rb;
+    private Vector3 inputVector;
 
     private void Awake()
     {
-        _transform = gameObject.GetComponent<Transform>();
+        rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        //Movimiento del player
-        var horizontal = Input.GetAxisRaw("Horizontal");
-        var vertical = Input.GetAxisRaw("Vertical");
-        var inputVector = new Vector3(horizontal, 0, vertical).normalized;
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
 
-        _transform.position += inputVector * movementSpeed * Time.deltaTime;
+        inputVector = new Vector3(horizontal, 0, vertical).normalized;
 
         if (inputVector.magnitude > 0)
-            _transform.forward = inputVector;
-
+            transform.forward = inputVector;
     }
+
+    private void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + inputVector * movementSpeed * Time.fixedDeltaTime);
+    }
+
     public void ModifySpeed(float multiplier, float duration)
     {
         movementSpeed *= multiplier;
-
         StartCoroutine(ResetSpeed(multiplier, duration));
     }
 

@@ -16,7 +16,8 @@ GameObject:
   - component: {fileID: 4592305842285126266}
   - component: {fileID: 641059652616277983}
   - component: {fileID: 8855761580391462244}
-  - component: {fileID: -3004922550618620379}
+  - component: {fileID: -2654564127474159148}
+  - component: {fileID: 8663973232488539665}
   m_Layer: 0
   m_Name: SM_Bean_Cowboy_01
   m_TagString: Untagged
@@ -188,7 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ef279e80fd9bc42a72747f938836d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-3004922550618620379
+  damage: 10
+--- !u!114 &-2654564127474159148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,15 +199,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 7424273177536736177}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 964749e5896824d468802c863a35b854, type: 3}
+  m_Script: {fileID: 11500000, guid: f982520a9544f8e4b8127d9f42f9e56d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  invulnerabilityPeriod: 0.5
-  camera: {fileID: 0}
-  targetType: 0
-  _currentHealth: 0
-  shotLogger: {fileID: 0}
+  maxHealth: 50
+  invulnerabilityPeriod: 0.2
+  killsLogger: {fileID: 0}
+--- !u!114 &8663973232488539665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7424273177536736177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19082f131667d2b478893a4a7eff7ecf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetType: 1
 --- !u!1 &8496317070450977119
 GameObject:
   m_ObjectHideFlags: 0

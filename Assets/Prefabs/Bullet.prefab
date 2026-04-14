@@ -65,6 +65,7 @@ MeshRenderer:
   m_RayTraceProcedural: 0
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -123,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919475bcf08421648b9aa558e82d798f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 10
   speed: 12
   timeToDespawn: 5
 --- !u!114 &-522324432634303979
@@ -138,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19082f131667d2b478893a4a7eff7ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetType: 0
+  targetType: 1
 --- !u!54 &-8490736289008699697
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -178,3 +179,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ef279e80fd9bc42a72747f938836d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10

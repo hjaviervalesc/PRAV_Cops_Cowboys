@@ -2,18 +2,15 @@ using UnityEngine;
 
 public class DamageOnContact : MonoBehaviour
 {
+    [SerializeField] private int damage = 10;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<Player>() != null || other.gameObject.GetComponent<Enemy>() != null)
+        // 1. ¿El otro objeto puede recibir daño?
+        if (other.TryGetComponent<IHittable>(out var hittable))
         {
-            if (this.GetComponent<PlayerHealth>() != null)
-                this.GetComponent<PlayerHealth>().TakeDamage(10);
-            if(other.GetComponent<PlayerHealth>() != null)
-            {
-                var health = other.GetComponent<PlayerHealth>();
-                health.TakeDamage(10);
-            }
+            hittable.TakeDamage(damage);
+
         }
     }
 }
